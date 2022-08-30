@@ -1,9 +1,12 @@
-import { Column, CreateDateColumn, PrimaryColumn } from "typeorm";
 
+import { randomUUID } from "crypto";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+
+@Entity("users")
 export class User {
 
     @PrimaryColumn()
-    protected _id: string;
+    id?: string;
 
     @Column()
     public name!: string;
@@ -20,9 +23,9 @@ export class User {
     @CreateDateColumn()
     public updated_at?: Date;
 
-    constructor(props: Omit<User, '_id'>, id?: string) {
-        //this._id = id ?? crypto.randomUUID()
-        Object.assign(this, props)
-        this._id = id ?? crypto.randomUUID()
+    constructor() {
+        if (!this.id) {
+            this.id = randomUUID();
+        }
     }
 }
