@@ -17,5 +17,6 @@ export class CreateUserUseCase {
         }
 
         await this.usersRepository.create(data);
+
     }
 }

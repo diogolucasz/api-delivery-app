@@ -1,13 +1,17 @@
 import express from 'express';
 import "reflect-metadata";
 import { router } from './routes';
-// import {router} from ''
+import { AppDataSource } from '../data-source';
 
-const app = express();
+AppDataSource.initialize().then(() => {
 
-app.use(express.json());
-app.use(router);
+    const app = express();
+    app.use(express.json());
+    app.use(router);
 
-app.listen(()=> {
-    console.log('Server is running on PORT' + 3000)
+    app.listen(3000, () => {
+        console.log('Server is running on PORT' + 3000)
+    })
 })
+
+
